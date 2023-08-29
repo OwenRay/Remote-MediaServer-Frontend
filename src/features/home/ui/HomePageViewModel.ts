@@ -1,4 +1,4 @@
-import { TranslationFunction } from '~/features/shared/i18n/types/TranslationFunction';
+import { TranslationFunction } from '../../shared/features/i18n/types/TranslationFunction';
 
 export interface IHomePageViewModel {}
 
@@ -8,4 +8,6 @@ export interface IHomePageViewModelProps {
 
 export const createHomePageViewModel = ({
 	t,
-}: IHomePageViewModelProps): IHomePageViewModel => ({});
+}: IHomePageViewModelProps): IHomePageViewModel => ({
+	test: t(''),
+});

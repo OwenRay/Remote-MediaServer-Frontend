@@ -17,18 +17,25 @@ export const theme = {
 	colors: {
 		...DefaultTheme.colors,
 		primary: primaryColor,
-		primaryContainer: primaryColorDark,
+		primaryContainer: primaryColor,
 		onPrimary: 'white',
 		onPrimaryContainer: 'white',
 		secondary: secondaryColor,
 		secondaryContainer: secondaryColor,
 		onSecondary: 'white',
-		background: primaryColorDark,
-		surface: primaryColorDark,
+		background: primaryColor,
+		surface: primaryColor,
 		backdrop: primaryColorDark,
+		backgroundColor: primaryColorDark,
 		onBackground: 'white',
 		inversePrimary: 'white',
 		text: 'white',
+		onSurface: 'white',
+		onSurfaceVariant: 'white',
+		inverseSurface: 'pink',
+		onSurfaceDisabled: 'red',
+		surfaceVariant: primaryColor,
+		inverseOnSurface: 'orange',
 	},
 };
 
@@ -40,8 +47,10 @@ export const theme = {
  * $secondary-color: #b8a300;
  */
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => (
-	<Provider theme={theme}>
-		<StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
-	</Provider>
-);
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+	return (
+		<Provider theme={theme}>
+			<StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+		</Provider>
+	);
+};

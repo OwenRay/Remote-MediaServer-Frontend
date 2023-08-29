@@ -1,6 +1,6 @@
-import { createHomePageViewModel } from './HomePageViewModel';
+import { createTranslationFunctionMock } from '../../shared/features/i18n/types/__mocks__/createTranslationFunctionMock';
 
-import { createTranslationFunctionMock } from '~/features/shared/i18n/types/__mocks__/createTranslationFunctionMock';
+import { createHomePageViewModel } from './HomePageViewModel';
 
 describe('HomePage', () => {
 	it('', () => {
@@ -11,6 +11,6 @@ describe('HomePage', () => {
 		const result = createHomePageViewModel({ t });
 
 		// Assert
-		expect(result).toEqual({});
+		expect(result).toEqual({ test: '' });
 	});
 });
