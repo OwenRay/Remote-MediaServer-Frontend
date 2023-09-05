@@ -35,6 +35,6 @@ describe('DrawerContents', () => {
 		fireEvent.press(getByText('Home'));
 
 		// Assert
-		expect(navigate).toHaveBeenCalledWith();
+		expect(navigate).toHaveBeenCalledWith('Home');
 	});
 });
