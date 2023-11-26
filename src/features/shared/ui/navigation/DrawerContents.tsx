@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import { DrawerStatus } from '@react-navigation/routers/lib/typescript/src/DrawerRouter';
-import { SafeAreaView } from 'react-native';
-import { Drawer as PaperDrawer, MD3Theme, withTheme } from 'react-native-paper';
+import { Drawer as PaperDrawer, MD3Theme } from 'react-native-paper';
 
 import * as routes from '../../../../routes';
 import { ScrollView } from '../layout/ScrollView';
 import { styled } from '../styled';
+import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {DrawerStatus} from "@react-navigation/native";
 
 export const DrawerContents = (props: DrawerContentComponentProps) => {
 	const history = props.state.history.filter(({ type }) => type === 'route');
@@ -16,32 +16,33 @@ export const DrawerContents = (props: DrawerContentComponentProps) => {
 		(route) => isRoute(last) && route.key === last.key,
 	);
 
+	const {top} = useSafeAreaInsets();
+
 	return (
-		<StyledDrawerContentScrollView>
-			<SafeAreaView>
-				{Object.values(routes).map((route) => (
-					<PaperDrawer.Item
-						key={route.name}
-						label={route.name}
-						icon={route.icon}
-						active={currentRoute?.name === route.name}
-						onPress={() => {
-							props.navigation.navigate(route.name);
-						}}
-					/>
-				))}
-			</SafeAreaView>
+		<StyledDrawerContentScrollView safeAreaTop={top}>
+			{Object.values(routes).map((route) => (
+				<PaperDrawer.Item
+					key={route.name}
+					label={route.name}
+					icon={route.icon}
+					active={currentRoute?.name === route.name}
+					onPress={() => {
+						props.navigation.navigate(route.name);
+					}}
+				/>
+			))}
 		</StyledDrawerContentScrollView>
 	);
 };
 
-const StyledDrawerContentScrollView = withTheme(styled(ScrollView)<{
+const StyledDrawerContentScrollView = styled(ScrollView)<{
 	theme: MD3Theme;
+	safeAreaTop: number;
 }>`
 	background-color: ${({ theme }) => theme.colors.backdrop};
 	height: 100%;
-	overflow: auto;
-`);
+	padding-top: ${({ safeAreaTop }) => safeAreaTop + 5}px;
+`;
 
 const isRoute = (
 	maybeRoute:
